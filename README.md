@@ -1,7 +1,7 @@
 # MazeGenerator
 ## Istruzioni compilazione con VSCode (Windows)
 #### Senza libreria grafica (visualizzazione su terminale)
-1. Commentare metodo display_grid_sfml() (Commentare righe 142-227 su Grid.cpp)
+1. Commentare implementazione metodo display_grid_sfml() (Commentare righe 142-227 su Grid.cpp)
 2. Commentare `#include  <SFML/Graphics.hpp>` alla riga 6 di Grid.cpp
 3. Decommentare `test.display_grid();` e commentare `test.display_grid_sfml(WIDTH, HEIGHT, CELL_SIZE);` alle righe 289-290 di main.cpp
 4. Rimuovere il MAKEFILE dalla cartella principale
