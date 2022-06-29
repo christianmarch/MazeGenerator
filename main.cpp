@@ -201,7 +201,7 @@ void recursive_backtraker(grid &test)
     }
 }
 
-
+//da sistemare
 void kruscal(grid &test)
 {
     vector<vector<cell*>> couples;
@@ -209,7 +209,7 @@ void kruscal(grid &test)
     unordered_map<cell*, int> set_for_cell;
     multimap<int, cell*> cells_in_set;
     vector<cell*> losers;
-    //INIZIALIZZIAMO IL GRID
+    //INIZIALIZZAZIONE GRID
     int a = 1;
     for(int i=1;i<=test.rows;i++)
     {
@@ -220,7 +220,7 @@ void kruscal(grid &test)
             a++;
         }
     }
-    //RIEMPIAMO COUPLES
+    //RIEMPIMENTO COUPLES
     for(int i=1;i<=test.rows;i++)
     {
         for(int j=1; j<=test.columns; j++)
