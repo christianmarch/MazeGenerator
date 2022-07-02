@@ -137,6 +137,8 @@ void wilsons(grid &test)
         unordered_map<int, cell*>::iterator it_rand = unvisited.begin();
         advance(it_rand, rand()%unvisited.size());
         here = it_rand -> second;
+        /*rando = (rand()%(unvisited.size()))+1;
+        cell *here = unvisited[rando];*/
         
         path.clear();
         path.push_back(here);
@@ -201,11 +203,11 @@ void recursive_backtraker(grid &test)
     }
 }
 
-//da sistemare
 void kruscal(grid &test)
 {
     vector<vector<cell*>> couples;
     vector<cell*> tmp;
+    //pair<cell*, cell*> tmp;
     unordered_map<cell*, int> set_for_cell;
     multimap<int, cell*> cells_in_set;
     vector<cell*> losers;
@@ -225,15 +227,19 @@ void kruscal(grid &test)
     {
         for(int j=1; j<=test.columns; j++)
         {
-            tmp.clear();
+            //tmp.clear();
             if(test.g[i][j].south->row > 0 && test.g[i][j].south->column > 0)
             {
+                
+                //tmp = make_pair(&(test.g[i][j]), test.g[i][j].south);
                 tmp.push_back(&(test.g[i][j]));
                 tmp.push_back((test.g[i][j]).south);
                 couples.push_back(tmp);
             }
+            //tmp.clear();
             if(test.g[i][j].east->row > 0 && test.g[i][j].east->column > 0)
             {
+                //tmp = make_pair(&(test.g[i][j]), test.g[i][j].east);
                 tmp.push_back(&(test.g[i][j]));
                 tmp.push_back((test.g[i][j]).east);
                 couples.push_back(tmp);
@@ -241,13 +247,15 @@ void kruscal(grid &test)
         }
     }
     //INIZIO ALGORITMO
-    tmp.clear();    //ora viene utilizzato per estrarre le coppie
+    //tmp.clear();    //ora viene utilizzato per estrarre le coppie
     int winner;
     int loser;
     while(!couples.empty())
     {
-        tmp = couples.back();       //implementare l'estrazione casuale
-        couples.pop_back();
+        vector<vector<cell*>>::iterator it_rand = couples.begin();
+        advance(it_rand, rand()%couples.size());
+        tmp = *it_rand;
+        couples.erase(it_rand);
         if(set_for_cell[tmp[0]] != set_for_cell[tmp[1]])
         {
             tmp[0]->link(tmp[1]);
@@ -284,8 +292,8 @@ int main()
     //binary_tree(test);
     //aldous_broder(test);
     //wilsons(test);
-    recursive_backtraker(test);
-    //kruscal(test);
+    //recursive_backtraker(test);
+    kruscal(test);
     //test.display_grid();
     test.display_grid_sfml(WIDTH, HEIGHT, CELL_SIZE);
     return 0;
