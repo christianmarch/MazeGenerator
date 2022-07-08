@@ -99,13 +99,13 @@ class cell
 
     bool isEqual(cell *c)
     {
-        if(row == (*c).row && column == (*c).column)
-        {
+        return (row == (*c).row && column == (*c).column);
+        /*{
             return true;
         }
         else
         {
             return false;
-        }
+        }*/
     }
 };

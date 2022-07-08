@@ -205,9 +205,9 @@ void recursive_backtraker(grid &test)
 
 void kruscal(grid &test)
 {
-    vector<vector<cell*>> couples;
-    vector<cell*> tmp;
-    //pair<cell*, cell*> tmp;
+    vector<pair<cell*,cell*>> couples;
+    //vector<cell*> tmp;
+    pair<cell*, cell*> tmp;
     unordered_map<cell*, int> set_for_cell;
     multimap<int, cell*> cells_in_set;
     vector<cell*> losers;
@@ -231,17 +231,17 @@ void kruscal(grid &test)
             if(test.g[i][j].south->row > 0 && test.g[i][j].south->column > 0)
             {
                 
-                //tmp = make_pair(&(test.g[i][j]), test.g[i][j].south);
-                tmp.push_back(&(test.g[i][j]));
-                tmp.push_back((test.g[i][j]).south);
+                tmp = make_pair(&(test.g[i][j]), test.g[i][j].south);
+                //tmp.push_back(&(test.g[i][j]));
+                //tmp.push_back((test.g[i][j]).south);
                 couples.push_back(tmp);
             }
             //tmp.clear();
             if(test.g[i][j].east->row > 0 && test.g[i][j].east->column > 0)
             {
-                //tmp = make_pair(&(test.g[i][j]), test.g[i][j].east);
-                tmp.push_back(&(test.g[i][j]));
-                tmp.push_back((test.g[i][j]).east);
+                tmp = make_pair(&(test.g[i][j]), test.g[i][j].east);
+                //tmp.push_back(&(test.g[i][j]));
+                //tmp.push_back((test.g[i][j]).east);
                 couples.push_back(tmp);
             }
         }
@@ -252,15 +252,15 @@ void kruscal(grid &test)
     int loser;
     while(!couples.empty())
     {
-        vector<vector<cell*>>::iterator it_rand = couples.begin();
+        vector<pair<cell*,cell*>>::iterator it_rand = couples.begin();
         advance(it_rand, rand()%couples.size());
         tmp = *it_rand;
         couples.erase(it_rand);
-        if(set_for_cell[tmp[0]] != set_for_cell[tmp[1]])
+        if(set_for_cell[tmp.first] != set_for_cell[tmp.second])
         {
-            tmp[0]->link(tmp[1]);
-            winner = set_for_cell[tmp[0]];
-            loser = set_for_cell[tmp[1]];
+            tmp.first->link(tmp.second);
+            winner = set_for_cell[tmp.first];
+            loser = set_for_cell[tmp.second];
             
             //RIEMPIO LOSERS
             losers.clear();
